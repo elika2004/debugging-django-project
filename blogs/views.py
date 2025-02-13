@@ -64,6 +64,7 @@ class BlogDetailsView(DetailView):
                 blog = get_object_or_404(Blog, id=id)
                 comment = form.save(commit=False)
                 comment.blog = blog
+                comment.name=request.user
                 comment.save()
                 messages.add_message(self.request, messages.SUCCESS, "successfully sent")
                 return redirect(self.request.path_info)

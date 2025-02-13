@@ -1,7 +1,7 @@
 from django.db import models
 from team.models import Team
-
-# Create your models here.
+from django.contrib.auth.models import User
+# Create your models here. 
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
@@ -45,7 +45,7 @@ class Blog(models.Model):
 
 class Comments(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    name = models.ForeignKey(User,on_delete=models.CASCADE )
     message = models.TextField()
     post = models.CharField(max_length=50)
     status = models.BooleanField(default=False)
@@ -56,7 +56,7 @@ class Comments(models.Model):
 
 class Reply(models.Model):
     comment = models.ForeignKey(Comments, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    name = models.ForeignKey(User,on_delete=models.CASCADE)
     message = models.TextField()
     status = models.BooleanField(default=False)
 
